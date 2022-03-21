@@ -1,9 +1,7 @@
 package br.edu.ifpb.companyreportstool.service;
 
 import br.edu.ifpb.companyreportstool.repository.ExpenseRepository;
-import br.edu.ifpb.companyreportstool.service.JsonExporter;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;

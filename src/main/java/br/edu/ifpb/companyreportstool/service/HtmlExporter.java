@@ -1,7 +1,5 @@
 package br.edu.ifpb.companyreportstool.service;
 
-import java.util.List;
-
 public class HtmlExporter implements ReportExporter{
     public String exportHeader(String title) {
         return "<header><h1>" + title + "</h1></header>";

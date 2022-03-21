@@ -1,13 +1,10 @@
 package br.edu.ifpb.companyreportstool.service;
 
 import br.edu.ifpb.companyreportstool.repository.TaxRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
-
 
 @Service
 public class TaxReportHtml extends TaxReport{

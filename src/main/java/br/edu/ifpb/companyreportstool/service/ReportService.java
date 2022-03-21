@@ -1,8 +1,5 @@
 package br.edu.ifpb.companyreportstool.service;
 
-import org.springframework.stereotype.Service;
-
-
 public abstract class ReportService {
 
 
