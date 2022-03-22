@@ -18,8 +18,8 @@ import static org.hamcrest.Matchers.equalTo;
 @SpringBootTest
 public class TaxReportTest {
 
-    @Autowired
-    private TaxReport expenseReport;
+    /*@Autowired
+    private TaxReport expenseReport;*/
     @Autowired
     private TaxRepository taxRepository;
 
@@ -36,8 +36,8 @@ public class TaxReportTest {
     }
 
     @Test
-    public void generateHTMLReportTest() {
-        String report = expenseReport.generateReport("html");
+    public void generateHTMLReportTest(@Autowired TaxHTML expenseReport) {
+        String report = expenseReport.generatedReport();
         String body = "<ul><li>"+taxRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining("</li><li>"))+"</li></ul>";
         assertThat(report, equalTo("<header><h1>Company Report</h1></header><main><h2>This is the tax Report</h2><p>"+body+"</p></main><footer>2022 - Design Patterns IFPB</footer>"));
@@ -45,8 +45,8 @@ public class TaxReportTest {
     }
 
     @Test
-    public void generateJsonReportTest() {
-        String report = expenseReport.generateReport("json");
+    public void generateJsonReportTest(@Autowired TaxJSON expenseReport) {
+        String report = expenseReport.generatedReport();
         String body = taxRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining(","));
         assertThat(report, equalTo("{ header: \"Company Report\" ,main: { title: \"This is the tax Report\", content: \""+body+"\" ,footer: \"2022 - Design Patterns IFPB\" }"));
