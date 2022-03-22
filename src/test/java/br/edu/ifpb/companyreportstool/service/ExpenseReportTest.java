@@ -21,8 +21,8 @@ import static org.hamcrest.Matchers.equalTo;
 @SpringBootTest
 public class ExpenseReportTest {
 
-    @Autowired
-    private ExpenseReport expenseReport;
+//    @Autowired
+//    private ExpenseReport expenseReport;
     @Autowired
     private ExpenseRepository expenseRepository;
 
@@ -40,8 +40,8 @@ public class ExpenseReportTest {
     }
 
     @Test
-    public void generateHTMLReportTest() {
-        String report = expenseReport.generateReport("html");
+    public void generateHTMLReportTest(@Autowired ExpenseReportHTML expenseReport) {
+        String report = expenseReport.generateReport();
         String body = "<ul><li>"+expenseRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining("</li><li>"))+"</li></ul>";
         assertThat(report, equalTo("<header><h1>Company Report</h1></header><main><h2>This is the Expense Report</h2><p>"+body+"</p></main><footer>2022 - Design Patterns IFPB</footer>"));
@@ -49,8 +49,8 @@ public class ExpenseReportTest {
     }
 
     @Test
-    public void generateJsonReportTest() {
-        String report = expenseReport.generateReport("json");
+    public void generateJsonReportTest(@Autowired ExpenseReportJSON expenseReport) {
+        String report = expenseReport.generateReport();
         String body = expenseRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining(","));
         assertThat(report, equalTo("{ header: \"Company Report\" ,main: { title: \"This is the Expense Report\", content: \""+body+"\" ,footer: \"2022 - Design Patterns IFPB\" }"));
