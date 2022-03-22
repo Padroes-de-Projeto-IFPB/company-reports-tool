@@ -6,23 +6,23 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class TaxReportHtml extends TaxReport{
-    
-    public TaxReportHtml(TaxRepository taxRepository) {
+public class TaxReportJson extends TaxReport{
+
+    public TaxReportJson(TaxRepository taxRepository) {
         super(taxRepository);
     }
 
     public ReportExporter getExporter() {
-        return new HtmlExporter();
+        return new JsonExporter();
     }
 
     public String writeBody() {
         return getExporter().exportBody("This is the tax Report", fillBody() );
-    };
-
-    public String fillBody() {
-        return "<ul><li>"+super.taxRepository.findAll().stream()
-                .map(Objects::toString).collect(Collectors.joining("</li><li>"))+"</li></ul>";
     }
 
+    public String fillBody() {
+        return super.taxRepository.findAll().stream()
+                .map(Objects::toString).collect(Collectors.joining(","));
+    }
+    
 }
