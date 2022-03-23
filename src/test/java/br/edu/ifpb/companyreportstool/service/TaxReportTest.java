@@ -2,6 +2,9 @@ package br.edu.ifpb.companyreportstool.service;
 
 import br.edu.ifpb.companyreportstool.domain.Tax;
 import br.edu.ifpb.companyreportstool.repository.TaxRepository;
+import br.edu.ifpb.companyreportstool.service.TaxReport;
+import br.edu.ifpb.companyreportstool.service.TaxReportHtml;
+import br.edu.ifpb.companyreportstool.service.TaxReportJson;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,8 +39,8 @@ public class TaxReportTest {
     }
 
     @Test
-    public void generateHTMLReportTest() {
-        String report = expenseReport.generateReport("html");
+    public void generateHTMLReportTest(@Autowired TaxReportHtml taxReportHtml)  {
+        String report = expenseReport.generateReport();
         String body = "<ul><li>"+taxRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining("</li><li>"))+"</li></ul>";
         assertThat(report, equalTo("<header><h1>Company Report</h1></header><main><h2>This is the tax Report</h2><p>"+body+"</p></main><footer>2022 - Design Patterns IFPB</footer>"));
@@ -45,8 +48,8 @@ public class TaxReportTest {
     }
 
     @Test
-    public void generateJsonReportTest() {
-        String report = expenseReport.generateReport("json");
+    public void generateJsonReportTest(@Autowired TaxReportJson taxReportJson)  {
+        String report = expenseReport.generateReport();
         String body = taxRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining(","));
         assertThat(report, equalTo("{ header: \"Company Report\" ,main: { title: \"This is the tax Report\", content: \""+body+"\" ,footer: \"2022 - Design Patterns IFPB\" }"));
