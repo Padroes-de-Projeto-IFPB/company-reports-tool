@@ -2,6 +2,9 @@ package br.edu.ifpb.companyreportstool.service;
 
 import br.edu.ifpb.companyreportstool.domain.Expense;
 import br.edu.ifpb.companyreportstool.repository.ExpenseRepository;
+import br.edu.ifpb.companyreportstool.service.ExpenseReport;
+import br.edu.ifpb.companyreportstool.service.ExpenseReportHtml;
+import br.edu.ifpb.companyreportstool.service.ExpenseReportJson;
 import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +29,7 @@ public class ExpenseReportTest {
     @Autowired
     private ExpenseRepository expenseRepository;
 
-    private Expense expense;
+    Expense expense;
 
     @BeforeEach
     public void init() {
@@ -40,8 +43,8 @@ public class ExpenseReportTest {
     }
 
     @Test
-    public void generateHTMLReportTest() {
-        String report = expenseReport.generateReport("html");
+    public void generateHTMLReportTest(@Autowired ExpenseReportHtml expenseReportHtml)  {
+        String report = expenseReport.generateReport();
         String body = "<ul><li>"+expenseRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining("</li><li>"))+"</li></ul>";
         assertThat(report, equalTo("<header><h1>Company Report</h1></header><main><h2>This is the Expense Report</h2><p>"+body+"</p></main><footer>2022 - Design Patterns IFPB</footer>"));
@@ -49,8 +52,8 @@ public class ExpenseReportTest {
     }
 
     @Test
-    public void generateJsonReportTest() {
-        String report = expenseReport.generateReport("json");
+    public void generateJsonReportTest(@Autowired ExpenseReportJson expenseReportJson) {
+        String report = expenseReport.generateReport();
         String body = expenseRepository.findAll().stream()
                 .map(Objects::toString).collect(Collectors.joining(","));
         assertThat(report, equalTo("{ header: \"Company Report\" ,main: { title: \"This is the Expense Report\", content: \""+body+"\" ,footer: \"2022 - Design Patterns IFPB\" }"));
