@@ -10,8 +10,14 @@ import java.util.stream.Collectors;
 
 public class ExpenseReport{
 
-    public void testando(){
-        ;
-    }
+//    public ReportService talvezNoService(String type){
+//        if (type.equals("html")) {
+//            return new ExpenseReportServiceHtml();
+//        } else if (type.equals("json")) {
+//            return new ExpenseReportServiceJson();
+//        }
+//    }
+
+
 }
 

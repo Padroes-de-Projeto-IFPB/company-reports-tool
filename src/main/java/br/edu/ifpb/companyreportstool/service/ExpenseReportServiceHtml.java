@@ -3,6 +3,7 @@ package br.edu.ifpb.companyreportstool.service;
 import br.edu.ifpb.companyreportstool.repository.ExpenseRepository;
 import br.edu.ifpb.companyreportstool.service.factory.HtmlExporter;
 import br.edu.ifpb.companyreportstool.service.factory.ReportExporter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;

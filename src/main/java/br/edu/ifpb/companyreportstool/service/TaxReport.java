@@ -9,9 +9,13 @@ import java.util.stream.Collectors;
 
 
 public class TaxReport{
-
-    public void testando(){
-        ;
-    }
+//
+//    public ReportService talvezNoService(String type){
+//        if (type.equals("html")) {
+//            return new TaxReportServiceHtml();
+//        } else if (type.equals("json")) {
+//            return new TaxReportServiceJson();
+//        }
+//    }
 }
 
